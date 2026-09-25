@@ -1,0 +1,944 @@
+/* ==========================================================================
+   VIBE MUSIC PLAYER — CSS
+   Pixel-perfect дизайн по макетам (Тёмная и Светлая темы)
+   ========================================================================== */
+
+:root {
+  /* ТЁМНАЯ ТЕМА (ПО УМОЛЧАНИЮ) */
+  --bg-app-outer: #0c0c0e;
+  --bg-panel: #141417;
+  --bg-card-hover: rgba(255, 255, 255, 0.04);
+  --bg-card-active: #202026;
+  --bg-row-hover: rgba(255, 255, 255, 0.035);
+  --bg-row-active: #1d182b;
+  --bg-thumb-default: #222228;
+  --bg-bottom-player: #141417;
+
+  --border-panel: #202026;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+
+  --text-main: #ffffff;
+  --text-muted: #8a8a9a;
+  --text-dim: #5c5c6c;
+  --text-accent: #c084fc;
+
+  --accent-purple: #7042f8;
+  --accent-purple-hover: #7d52f9;
+  --accent-purple-glow: rgba(112, 66, 248, 0.35);
+
+  --cat-jazz: #7042f8;
+  --cat-classic: #d85c18;
+  --cat-blues: #1c62f2;
+
+  --progress-rail: #272730;
+  --progress-fill: #7042f8;
+  --progress-thumb: #ffffff;
+
+  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --bottom-bar-height: 76px;
+}
+
+/* СВЕТЛАЯ ТЕМА */
+body.theme-light {
+  --bg-app-outer: #eaedf2;
+  --bg-panel: #ffffff;
+  --bg-card-hover: #f3f4f8;
+  --bg-card-active: #f1f2f6;
+  --bg-row-hover: #f7f8fa;
+  --bg-row-active: #f3f0ff;
+  --bg-thumb-default: #e4e7ee;
+  --bg-bottom-player: #ffffff;
+
+  --border-panel: #e2e5ec;
+  --border-subtle: #e2e5ec;
+
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-dim: #9ca3af;
+  --text-accent: #6d28d9;
+
+  --accent-purple: #7042f8;
+  --accent-purple-hover: #7d52f9;
+  --accent-purple-glow: rgba(112, 66, 248, 0.2);
+
+  --cat-jazz: #7042f8;
+  --cat-classic: #d85c18;
+  --cat-blues: #1c62f2;
+
+  --progress-rail: #e5e7eb;
+  --progress-fill: #7042f8;
+  --progress-thumb: #ffffff;
+}
+
+/* БАЗОВЫЕ СТИЛИ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: var(--font-base);
+  background-color: var(--bg-app-outer);
+  color: var(--text-main);
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ГЛАВНАЯ СЕТКА ПРИЛОЖЕНИЯ */
+.app-wrapper {
+  height: calc(100vh - var(--bottom-bar-height));
+  width: 100vw;
+  padding: 14px 16px 12px;
+  background-color: var(--bg-app-outer);
+  overflow: hidden;
+}
+
+.app-layout {
+  display: flex;
+  gap: 14px;
+  height: 100%;
+  width: 100%;
+}
+
+/* ==========================================================================
+   ЛЕВЫЙ САЙДБАР (ПАНЕЛЬ КАТЕГОРИЙ)
+   ========================================================================== */
+.sidebar-panel {
+  width: 230px;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 14px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px 18px;
+}
+
+.decor-slashes {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: -1px;
+}
+
+.sidebar-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.category-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  width: 100%;
+}
+
+.category-card:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.category-card.active {
+  background-color: var(--bg-card-active);
+  border-color: var(--border-subtle);
+}
+
+.category-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cat-jazz-bg {
+  background-color: var(--cat-jazz);
+}
+
+.cat-classic-bg {
+  background-color: var(--cat-classic);
+}
+
+.cat-blues-bg {
+  background-color: var(--cat-blues);
+}
+
+.cat-svg {
+  width: 22px;
+  height: 22px;
+}
+
+.category-text {
+  flex: 1;
+  overflow: hidden;
+}
+
+.category-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.category-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+.category-playing-indicator {
+  color: var(--accent-purple);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-speaker 1.2s infinite ease-in-out;
+}
+
+.category-card.is-cat-playing .category-playing-indicator {
+  display: flex;
+}
+
+@keyframes pulse-speaker {
+  0%, 100% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* ==========================================================================
+   ГЛАВНАЯ ПАНЕЛЬ (MAIN CONTENT)
+   ========================================================================== */
+.main-panel {
+  flex: 1;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-panel);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 36px;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.main-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 18px;
+}
+
+.mobile-cat-tabs {
+  display: none;
+  gap: 6px;
+  margin-right: auto;
+}
+
+.m-tab {
+  padding: 6px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border-panel);
+  background: var(--bg-app-outer);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.m-tab.active {
+  background: var(--accent-purple);
+  color: #ffffff;
+  border-color: var(--accent-purple);
+}
+
+.theme-toggle-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--border-panel);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.theme-toggle-btn:hover {
+  color: var(--text-main);
+  background-color: var(--bg-card-hover);
+}
+
+body.theme-dark .moon-icon { display: none; }
+body.theme-dark .sun-icon { display: block; }
+body.theme-light .sun-icon { display: none; }
+body.theme-light .moon-icon { display: block; }
+
+/* Hero секция */
+.hero-block {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  margin-bottom: 22px;
+}
+
+.hero-cover-box {
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
+  background-color: var(--cat-jazz);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px var(--accent-purple-glow);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-cover-box.cover-classic {
+  background-color: var(--cat-classic);
+  box-shadow: 0 8px 24px rgba(216, 92, 24, 0.25);
+}
+
+.hero-cover-box.cover-blues {
+  background-color: var(--cat-blues);
+  box-shadow: 0 8px 24px rgba(28, 98, 242, 0.25);
+}
+
+.hero-svg-icon {
+  width: 68px;
+  height: 68px;
+}
+
+.hero-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hero-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.hero-heading {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  color: var(--text-main);
+}
+
+/* Кнопки действий Hero */
+.hero-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.hero-btn-play {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--accent-purple);
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+  box-shadow: 0 4px 14px var(--accent-purple-glow);
+}
+
+.hero-btn-play:hover {
+  background-color: var(--accent-purple-hover);
+  transform: scale(1.05);
+}
+
+.hero-btn-play:active {
+  transform: scale(0.96);
+}
+
+.hero-btn-play .pause-svg { display: none; }
+.hero-btn-play.is-playing .play-svg { display: none; }
+.hero-btn-play.is-playing .pause-svg { display: block; }
+
+.hero-btn-shuffle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.hero-btn-shuffle:hover {
+  color: var(--text-main);
+}
+
+.hero-btn-shuffle.active {
+  color: var(--accent-purple);
+}
+
+/* ==========================================================================
+   СПИСОК ТРЕКОВ (TRACKS TABLE)
+   ========================================================================== */
+.tracks-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tracks-table-head {
+  display: grid;
+  grid-template-columns: 36px 1fr 60px;
+  align-items: center;
+  padding: 8px 12px 10px;
+  border-bottom: 1px solid var(--border-panel);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.head-num {
+  text-align: center;
+}
+
+.head-name {
+  padding-left: 14px;
+}
+
+.head-time {
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tracks-table-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.track-item-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px 1fr 60px;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.track-item-row:hover {
+  background-color: var(--bg-row-hover);
+}
+
+.track-item-row.active {
+  background-color: var(--bg-row-active);
+}
+
+/* Левая полоска-индикатор активного трека как на макете */
+.track-item-row.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3.5px;
+  background-color: var(--accent-purple);
+  border-radius: 2px;
+}
+
+.col-number-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.col-number-box .plain-num {
+  display: block;
+}
+
+.col-number-box .hover-play-icon {
+  display: none;
+  color: var(--text-main);
+}
+
+.track-item-row:hover .col-number-box .plain-num {
+  display: none;
+}
+
+.track-item-row:hover .col-number-box .hover-play-icon {
+  display: block;
+}
+
+/* Анимированный эквалайзер */
+.eq-bars-group {
+  display: none;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 14px;
+}
+
+.eq-bar {
+  width: 2.5px;
+  background-color: var(--accent-purple);
+  border-radius: 1px;
+  animation: eq-bounce 0.75s ease-in-out infinite alternate;
+}
+
+.eq-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+.eq-bar:nth-child(2) { height: 100%; animation-delay: 0.3s; }
+.eq-bar:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+
+@keyframes eq-bounce {
+  0% { height: 20%; }
+  100% { height: 100%; }
+}
+
+.track-item-row.active.is-playing .col-number-box .plain-num,
+.track-item-row.active.is-playing .col-number-box .hover-play-icon {
+  display: none !important;
+}
+
+.track-item-row.active.is-playing .eq-bars-group {
+  display: flex;
+}
+
+.col-track-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 14px;
+  overflow: hidden;
+}
+
+.track-thumb-square {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background-color: var(--bg-thumb-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+}
+
+.track-thumb-square .thumb-svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+}
+
+.track-item-row.active .track-thumb-square {
+  background-color: var(--accent-purple);
+}
+
+.track-item-row.active .track-thumb-square .thumb-svg {
+  opacity: 1;
+}
+
+.track-names-box {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.track-title-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-item-row.active .track-title-text {
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+.track-artist-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}
+
+.col-time-dur {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.track-item-row.active .col-time-dur {
+  color: var(--text-accent);
+}
+
+.tracks-empty-msg {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   НИЖНЯЯ ПАНЕЛЬ ПЛЕЕРА (BOTTOM PLAYER BAR)
+   ========================================================================== */
+.bottom-player-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--bottom-bar-height);
+  background-color: var(--bg-bottom-player);
+  border-top: 1px solid var(--border-panel);
+  display: grid;
+  grid-template-columns: 280px 1fr 240px;
+  align-items: center;
+  padding: 0 24px;
+  z-index: 100;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
+}
+
+/* Левая секция */
+.player-left-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.current-cover-mini {
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  background-color: var(--cat-jazz);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mini-svg {
+  width: 22px;
+  height: 22px;
+}
+
+.current-meta-text {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.current-song-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.current-song-artist {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-like-heart {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: all 0.12s ease;
+  flex-shrink: 0;
+}
+
+.btn-like-heart:hover {
+  color: var(--text-main);
+}
+
+.btn-like-heart.liked {
+  color: #ef4444;
+}
+
+.btn-like-heart.liked svg {
+  fill: #ef4444;
+}
+
+/* Центральная секция: Кнопки + Прогресс */
+.player-center-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  max-width: 580px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.buttons-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.p-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  transition: color 0.12s ease, transform 0.1s ease;
+}
+
+.p-btn:hover {
+  color: var(--text-main);
+  transform: scale(1.08);
+}
+
+.p-btn:active {
+  transform: scale(0.95);
+}
+
+.p-btn.active {
+  color: var(--accent-purple);
+}
+
+.p-btn-play-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: var(--accent-purple);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+  box-shadow: 0 2px 10px var(--accent-purple-glow);
+}
+
+.p-btn-play-circle:hover {
+  background-color: var(--accent-purple-hover);
+  transform: scale(1.06);
+}
+
+.p-btn-play-circle:active {
+  transform: scale(0.95);
+}
+
+.p-btn-play-circle .pause-svg { display: none; }
+.p-btn-play-circle.is-playing .play-svg { display: none; }
+.p-btn-play-circle.is-playing .pause-svg { display: block; }
+
+.timeline-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.time-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  width: 32px;
+}
+
+#timeCurrent { text-align: right; }
+#timeTotal { text-align: left; }
+
+.progress-hit-area {
+  flex: 1;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress-rail {
+  width: 100%;
+  height: 4px;
+  background-color: var(--progress-rail);
+  border-radius: 2px;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--progress-fill);
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  pointer-events: none;
+}
+
+.progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--progress-thumb);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.progress-hit-area:hover .progress-dot {
+  opacity: 1;
+}
+
+/* Правая секция: Громкость */
+.player-right-volume {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-mute-speaker {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 50%;
+  transition: color 0.12s ease;
+}
+
+.btn-mute-speaker:hover {
+  color: var(--text-main);
+}
+
+.btn-mute-speaker .vol-off-svg { display: none; }
+.btn-mute-speaker.muted .vol-on-svg { display: none; }
+.btn-mute-speaker.muted .vol-off-svg { display: block; }
+.btn-mute-speaker.muted { color: #ef4444; }
+
+.volume-slider-bar {
+  display: flex;
+  align-items: center;
+  width: 90px;
+}
+
+.vol-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  background: var(--progress-rail);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.vol-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--progress-thumb);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.vol-range::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--progress-thumb);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ */
+@media (max-width: 800px) {
+  .sidebar-panel {
+    display: none;
+  }
+  .mobile-cat-tabs {
+    display: flex;
+  }
+  .main-panel {
+    padding: 16px 18px;
+  }
+  .bottom-player-bar {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    padding: 8px 16px;
+  }
+  .player-left-info, .player-right-volume {
+    display: none;
+  }
+}

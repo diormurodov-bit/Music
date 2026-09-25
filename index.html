@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Player — Музыкальный плеер</title>
+    <meta name="description" content="Музыкальный плеер по макету с категориями Jazz, Classic, Blues" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="theme-dark">
+    <div class="app-wrapper">
+      <div class="app-layout">
+        <!-- Левый сайдбар с категориями -->
+        <aside class="sidebar-panel">
+          <div class="sidebar-header">
+            <span class="decor-slashes">||\</span>
+            <span class="sidebar-title">Категории</span>
+          </div>
+
+          <nav class="categories-list" id="categoriesList">
+            <!-- Jazz -->
+            <button class="category-card active" data-category="jazz" id="cat-jazz" type="button">
+              <div class="category-icon cat-jazz-bg">
+                <svg class="cat-svg" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M86 165V79L183 64V145" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="63" cy="168" r="24" stroke="#fff" stroke-width="14"/>
+                  <circle cx="161" cy="151" r="24" stroke="#fff" stroke-width="14"/>
+                </svg>
+              </div>
+              <div class="category-text">
+                <div class="category-name">Jazz</div>
+                <div class="category-sub" id="count-jazz">Плейлист · 8 треков</div>
+              </div>
+              <div class="category-playing-indicator" id="speaker-jazz" title="Играет">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+                </svg>
+              </div>
+            </button>
+
+            <!-- Classic -->
+            <button class="category-card" data-category="classic" id="cat-classic" type="button">
+              <div class="category-icon cat-classic-bg">
+                <svg class="cat-svg" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M86 165V79L183 64V145" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="63" cy="168" r="24" stroke="#fff" stroke-width="14"/>
+                  <circle cx="161" cy="151" r="24" stroke="#fff" stroke-width="14"/>
+                </svg>
+              </div>
+              <div class="category-text">
+                <div class="category-name">Classic</div>
+                <div class="category-sub" id="count-classic">Плейлист · 6 треков</div>
+              </div>
+              <div class="category-playing-indicator" id="speaker-classic" title="Играет">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+                </svg>
+              </div>
+            </button>
+
+            <!-- Blues -->
+            <button class="category-card" data-category="blues" id="cat-blues" type="button">
+              <div class="category-icon cat-blues-bg">
+                <svg class="cat-svg" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M86 165V79L183 64V145" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="63" cy="168" r="24" stroke="#fff" stroke-width="14"/>
+                  <circle cx="161" cy="151" r="24" stroke="#fff" stroke-width="14"/>
+                </svg>
+              </div>
+              <div class="category-text">
+                <div class="category-name">Blues</div>
+                <div class="category-sub" id="count-blues">Плейлист · 6 треков</div>
+              </div>
+              <div class="category-playing-indicator" id="speaker-blues" title="Играет">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+                </svg>
+              </div>
+            </button>
+          </nav>
+        </aside>
+
+        <!-- Главная панель контента -->
+        <main class="main-panel">
+          <!-- Верхний бар с кнопкой темы -->
+          <div class="main-top-bar">
+            <div class="mobile-cat-tabs" id="mobileCatTabs">
+              <button class="m-tab active" data-category="jazz">Jazz</button>
+              <button class="m-tab" data-category="classic">Classic</button>
+              <button class="m-tab" data-category="blues">Blues</button>
+            </div>
+
+            <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Сменить тему" title="Сменить тему">
+              <!-- Иконка солнца (в тёмной теме) -->
+              <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+              </svg>
+              <!-- Иконка луны (в светлой теме) -->
+              <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Hero блок плейлиста -->
+          <section class="hero-block">
+            <div class="hero-cover-box" id="heroCover">
+              <svg class="hero-svg-icon" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M86 165V79L183 64V145" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="63" cy="168" r="24" stroke="#fff" stroke-width="12"/>
+                <circle cx="161" cy="151" r="24" stroke="#fff" stroke-width="12"/>
+              </svg>
+            </div>
+            <div class="hero-details">
+              <span class="hero-label">Плейлист</span>
+              <h1 class="hero-heading" id="heroHeading">Jazz</h1>
+            </div>
+          </section>
+
+          <!-- Кнопки действий Hero -->
+          <section class="hero-controls">
+            <button class="hero-btn-play" id="btnHeroPlay" type="button" aria-label="Воспроизведение">
+              <!-- Play -->
+              <svg class="play-svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="7,5 19,12 7,19"></polygon>
+              </svg>
+              <!-- Pause -->
+              <svg class="pause-svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+                <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+              </svg>
+            </button>
+
+            <button class="hero-btn-shuffle" id="btnHeroShuffle" type="button" aria-label="Случайный порядок" title="Случайный порядок">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 3 21 3 21 8"></polyline>
+                <line x1="4" y1="20" x2="21" y2="3"></line>
+                <polyline points="21 16 21 21 16 21"></polyline>
+                <line x1="15" y1="15" x2="21" y2="21"></line>
+                <line x1="4" y1="4" x2="9" y2="9"></line>
+              </svg>
+            </button>
+          </section>
+
+          <!-- Список треков -->
+          <section class="tracks-section">
+            <div class="tracks-table-head">
+              <div class="head-col head-num">#</div>
+              <div class="head-col head-name">Название</div>
+              <div class="head-col head-time">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <div class="tracks-table-body" id="tracksList">
+              <!-- Список треков рендерится через script.js -->
+            </div>
+
+            <div class="tracks-empty-msg" id="emptyState" style="display: none;">
+              В этой категории нет треков
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- Нижняя панель плеера -->
+    <footer class="bottom-player-bar">
+      <!-- Левая часть: Инфо о треке -->
+      <div class="player-left-info">
+        <div class="current-cover-mini" id="currentTrackCover">
+          <svg class="mini-svg" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M86 165V79L183 64V145" stroke="#fff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="63" cy="168" r="24" stroke="#fff" stroke-width="14"/>
+            <circle cx="161" cy="151" r="24" stroke="#fff" stroke-width="14"/>
+          </svg>
+        </div>
+        <div class="current-meta-text">
+          <div class="current-song-title" id="currentTrackTitle">Have Yourself A Merry Little Christmas</div>
+          <div class="current-song-artist" id="currentTrackArtist">Frank Sinatra</div>
+        </div>
+        <button class="btn-like-heart" id="btnLike" type="button" aria-label="Нравится">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Центральная часть: Контролы + Таймлайн -->
+      <div class="player-center-controls">
+        <div class="buttons-row">
+          <button class="p-btn p-btn-shuffle" id="btnShuffle" type="button" aria-label="Случайный порядок" title="Случайный порядок">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 3 21 3 21 8"></polyline>
+              <line x1="4" y1="20" x2="21" y2="3"></line>
+              <polyline points="21 16 21 21 16 21"></polyline>
+              <line x1="15" y1="15" x2="21" y2="21"></line>
+              <line x1="4" y1="4" x2="9" y2="9"></line>
+            </svg>
+          </button>
+
+          <button class="p-btn p-btn-prev" id="btnPrev" type="button" aria-label="Предыдущий" title="Предыдущий трек">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="19 19 9 12 19 5 19 19"></polygon>
+              <rect x="5" y="5" width="2.5" height="14" rx="0.5"></rect>
+            </svg>
+          </button>
+
+          <button class="p-btn-play-circle" id="btnPlayPause" type="button" aria-label="Воспроизведение / Пауза">
+            <svg class="play-svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="7,5 19,12 7,19"></polygon>
+            </svg>
+            <svg class="pause-svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="5" width="4" height="14" rx="1"></rect>
+              <rect x="14" y="5" width="4" height="14" rx="1"></rect>
+            </svg>
+          </button>
+
+          <button class="p-btn p-btn-next" id="btnNext" type="button" aria-label="Следующий" title="Следующий трек">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 5 15 12 5 19 5 5"></polygon>
+              <rect x="16.5" y="5" width="2.5" height="14" rx="0.5"></rect>
+            </svg>
+          </button>
+
+          <button class="p-btn p-btn-repeat" id="btnRepeat" type="button" aria-label="Повтор" title="Повтор трека">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="17 1 21 5 17 9"></polyline>
+              <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+              <polyline points="7 23 3 19 7 15"></polyline>
+              <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="timeline-row">
+          <span class="time-label" id="timeCurrent">0:00</span>
+          <div class="progress-hit-area" id="progressBarContainer">
+            <div class="progress-rail" id="progressTrack">
+              <div class="progress-fill" id="progressFilled"></div>
+              <div class="progress-dot" id="progressThumb"></div>
+            </div>
+          </div>
+          <span class="time-label" id="timeTotal">0:00</span>
+        </div>
+      </div>
+
+      <!-- Правая часть: Громкость -->
+      <div class="player-right-volume">
+        <button class="btn-mute-speaker" id="btnMute" type="button" aria-label="Звук">
+          <svg class="vol-on-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <svg class="vol-off-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+
+        <div class="volume-slider-bar">
+          <input 
+            type="range" 
+            id="volumeSlider" 
+            class="vol-range" 
+            min="0" 
+            max="100" 
+            value="70" 
+            aria-label="Громкость" 
+          />
+        </div>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

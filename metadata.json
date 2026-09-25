@@ -1,0 +1,6 @@
+{
+  "name": "Vibe Music Player",
+  "description": "Музыкальный веб-плеер по макету с категориями Jazz, Classic, Blues, управлением громкостью, таймером и прогресс-баром.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
